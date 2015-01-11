@@ -1,3 +1,4 @@
+
 // Copyright 2015 The Rust-Windows Project Developers. See the
 // COPYRIGHT file at the top-level directory of this distribution.
 //
@@ -114,7 +115,7 @@ pub struct PAINTSTRUCT {
     pub rcPaint: RECT,
     pub fRestore: BOOL,
     pub fIncUpdate: BOOL,
-    pub rgbReserved: [BYTE, ..32],
+    pub rgbReserved: [BYTE; ..32],
 }
 
 // kernel32
