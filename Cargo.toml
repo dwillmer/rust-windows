@@ -1,0 +1,6 @@
+[package]
+
+name = "rust-windows"
+version = "0.0.1"
+
+crate-type = ["rlib"]
