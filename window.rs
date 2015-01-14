@@ -12,6 +12,7 @@ use std;
 use std::cell::RefCell;
 use std::rc::Rc;
 use std::collections::HashMap;
+use std::hash::{hash, Hash, Hasher, Writer};
 
 use libc::{c_int, c_void};
 
@@ -36,7 +37,7 @@ pub struct WndClass {
 
 impl WndClass {
     pub fn register(&self, instance: Instance) -> bool {
-        self.menu.with_menu_p(|menu_p| {
+        self.menu.with_menu_p( &mut | menu_p: *const u16| {
             let clsname_u = self.classname.to_c_u16();
             let wcex = WNDCLASSEX {
                 cbSize: std::mem::size_of::<WNDCLASSEX>() as UINT,
@@ -114,7 +115,7 @@ pub struct WindowParams {
     pub ex_style: u32,
 }
 
-#[deriving(PartialEq, Eq, Hash, Copy)]
+#[deriving(PartialEq, Hash, Copy)]
 pub struct Window {
     pub wnd: HWND,
 }
@@ -128,6 +129,20 @@ impl Clone for Window {
         Window {
             wnd: self.wnd,
         }
+    }
+}
+
+impl PartialEq for Window {
+    fn eq( &self, other: &Window ) -> bool {
+        self.wnd == other.wnd
+    }
+}
+
+impl Eq for Window {}
+
+impl< H: Hasher + Writer > Hash<H> for Window {
+    fn hash( &self, state: &mut H ) {
+        self.wnd.hash(state);
     }
 }
 

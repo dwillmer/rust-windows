@@ -151,7 +151,7 @@ impl Clone for Font {
 }
 
 impl Font {
-    pub fn new(attr: &FontAttr) -> Option<Font> {
+    pub fn new(attr: FontAttr) -> Option<Font> {
         let face = attr.face.to_c_u16();
         let hfont = unsafe {
             gdi::CreateFontW(

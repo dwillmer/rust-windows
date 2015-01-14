@@ -7,12 +7,14 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-#![feature(globs, phase, macro_rules)]
 #![crate_type = "lib"]
 #![crate_type = "dylib"]
 #![crate_name = "rust-windows"]
 
-#[phase(plugin, link)] extern crate log;
+#![feature(int_uint)]
+
+// #[phase(plugin, link)] 
+extern crate log;
 
 extern crate libc;
 extern crate collections;

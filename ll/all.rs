@@ -115,7 +115,7 @@ pub struct PAINTSTRUCT {
     pub rcPaint: RECT,
     pub fRestore: BOOL,
     pub fIncUpdate: BOOL,
-    pub rgbReserved: [BYTE; ..32],
+    pub rgbReserved: [BYTE; 32],
 }
 
 // kernel32
